@@ -183,26 +183,6 @@ class TreeNode {
 
 }
 
-class ResultKey {
-	TreeNode parent;
-	int levelNumber;
-
-	ResultKey(TreeNode parent, int levelNumber) {
-		this.parent = parent;
-		this.levelNumber = levelNumber;
-	}
-
-	public boolean equals(Object o) {
-		if (o instanceof ResultKey) {
-			ResultKey resKey = (ResultKey) o;
-			return (resKey.levelNumber == this.levelNumber);
-
-		} else {
-			return false;
-		}
-	}
-}
-
 class QueueNode {
 	TreeNode n;
 	int levelNumber;
