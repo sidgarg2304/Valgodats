@@ -8,10 +8,74 @@ import java.util.List;
 public class CombinationsAlgorithms {
 
 	public static void main(String[] args) {
-		 splitNumberIntoCombinations(4);
+		// splitNumberIntoCombinations(4);
 		// splitNumberIntoCombinationsWithoutDups(5);
-//		int[] a = { 3, 5, 8 };
-//		combinations(a);
+		// int[] a = { 3, 5, 8 };
+		// combinations(a);
+
+		testcombinations();
+
+		testgetPermutation();
+		
+		testcombinationsOfKNumbers();
+
+	}
+
+	public static void testcombinations() {
+		combinations(new int[] { 1, 2, 3 });
+	}
+
+	public static void testgetPermutation() {
+		getPermutation(4, 14);
+	}
+	
+	public static void testcombinationsOfKNumbers(){
+		combinationsOfKNumbers(4,2);
+	}
+
+	public static String getPermutation(int n, int k) {
+
+		// initialize all numbers
+		ArrayList<Integer> numberList = new ArrayList<Integer>();
+		for (int i = 1; i <= n; i++) {
+			numberList.add(i);
+		}
+
+		// change k to be index
+		k--;
+
+		// set factorial of n
+		int curNumsFactorial = 1;
+		for (int i = 1; i <= n; i++) {
+			curNumsFactorial = curNumsFactorial * i;
+		}
+
+		String result = "";
+
+		// find sequence
+		for (int i = 0; i < n; i++) {
+
+			int curNumOfElements = n - i; // 4
+			// which is also same as factorial of other elements // 24/4 = 6
+			int numOfElementsInBox = curNumsFactorial / curNumOfElements;
+
+			// 15/6 = 2. This means that this is the 3rd box and the first element
+			// of 3rd box would be the 3rd element which is at position 2
+			int boxNumber = k / numOfElementsInBox;
+
+			// get number according to curIndex
+			result += numberList.get(boxNumber);
+			// remove from list
+			numberList.remove(boxNumber);
+
+			// inside 3rd box, there are 6 combinations of 3 elements.
+			// 15th position of main box would be 3rd position of this 6 elements
+			// box
+			k = k % numOfElementsInBox;
+			curNumsFactorial = numOfElementsInBox;
+		}
+
+		return result.toString();
 	}
 
 	public static void combinations(int[] a) {
@@ -23,71 +87,98 @@ public class CombinationsAlgorithms {
 		}
 		combinations(list, new ArrayList<Integer>(), combinations);
 
-		System.out.print("combinations " + combinations);
+		System.out.println("combinations " + combinations);
 	}
 
-	public static void combinations(List<Integer> a,  List<Integer> temp, List<List<Integer>> combinations) {
-		
-		if (a.isEmpty() ) {
-			List<Integer> newCombinationFound = new ArrayList<Integer>();
-			newCombinationFound.addAll(temp); // Copy temp elements to new list object			
+	public static void combinations(List<Integer> a, List<Integer> temp, List<List<Integer>> combinations) {
 
-			combinations.add(newCombinationFound); // place this new combination to the result list
+		if (a.isEmpty()) {
+			List<Integer> newCombinationFound = new ArrayList<Integer>();
+			newCombinationFound.addAll(temp); // Copy temp elements to new list
+														 // object
+
+			combinations.add(newCombinationFound); // place this new combination to
+																// the result list
 			return;
 		}
-		for (int i = 0; i < a.size(); i++) {			
-			List<Integer> list = new ArrayList<Integer>();
-			for (int j = 0; j < a.size(); j++) {
-				if (a.get(i) != a.get(j)) {
-					list.add(a.get(j));
-				}
-			}
+		for (int i = 0; i < a.size(); i++) {
+			int val = a.get(i);
 			temp.add(a.get(i));
-
-			combinations(list, temp, combinations);
+			a.remove(i);
+			combinations(a, temp, combinations);
 			temp.remove(temp.size() - 1);
+			a.add(i, val);
 		}
+	}
+
+	public static void combinationsOfKNumbers(int n, int k) {
+
+		List<List<Integer>> result = new ArrayList<>();
+		combinationsOfKNumbers(n, k, new ArrayList<Integer>(), result, 1);
+		
+		System.out.println("combinations of k elements are " + result);
+	}
+
+	public static void combinationsOfKNumbers(int n, int k, List<Integer> temp, List<List<Integer>> result, int start) {
+		
+		if(temp.size() == 2){
+			List<Integer> curResult = new ArrayList<>();
+			curResult.addAll(temp);
+			result.add(curResult);
+			return;
+		}
+
+		for(int i = start;i<=n;i++){
+			temp.add(i);
+			combinationsOfKNumbers(n, k, temp, result, i+1);
+			temp.remove(temp.size()-1);
+		}
+		
+		
 	}
 
 	public static void splitNumberIntoCombinations(int n) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
 
-		combinations(n,  new ArrayList<Integer>(), result);
+		splitNumberIntoCombinations(n, new ArrayList<Integer>(), result);
 		for (List<Integer> temp : result) {
 			System.out.println(temp);
 		}
 	}
 
-	private static void combinations(int n, List<Integer> temp, List<List<Integer>> result) {
-		if (n==0) {
+	private static void splitNumberIntoCombinations(int n, List<Integer> temp, List<List<Integer>> result) {
+		if (n == 0) {
 			List<Integer> list = new ArrayList<Integer>();
 			list.addAll(temp); // copy temp elements to new array list
 			result.add(list);
 			return;
 		}
 
-//		for (int i = 1; i <= n - t; i++) {
-//			temp.add(i);
-//			combinations(n, t + i, temp, result);
-//			temp.remove(temp.size() - 1);
-//		}
-		
+		// for (int i = 1; i <= n - t; i++) {
+		// temp.add(i);
+		// combinations(n, t + i, temp, result);
+		// temp.remove(temp.size() - 1);
+		// }
+
 		for (int i = 1; i <= n; i++) {
 			temp.add(i);
-			combinations(n-i, temp, result);
+			splitNumberIntoCombinations(n - i, temp, result);
 			temp.remove(temp.size() - 1);
 		}
 	}
-	
-	// Create a result List of List
-	// Create a temp empty list 
-	// Create a recursive function which takes result , temp, input and any additional required variables
-	//inside recursive function
 
-	    // interate over input array , add one element to temp, call the same function again and then remove the last added element from tmep 
-   // when you hit boundary condition, copy temp elements to new arraylist and place this new list inside result but place this logic before above for loop
-	
-	
+	// Create a result List of List
+	// Create a temp empty list
+	// Create a recursive function which takes result , temp, input and any
+	// additional required variables
+	// inside recursive function
+
+	// interate over input array , add one element to temp, call the same
+	// function again and then remove the last added element from tmep
+	// when you hit boundary condition, copy temp elements to new arraylist and
+	// place this new list inside result but place this logic before above for
+	// loop
+
 	static void splitNumberIntoCombinationsWithoutDups(int n) {
 		int[] p = new int[n];
 

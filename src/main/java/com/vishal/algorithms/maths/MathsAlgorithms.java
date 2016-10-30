@@ -4,29 +4,30 @@ public class MathsAlgorithms {
 
 	public static void main(String[] args) {
 //		System.out.println(isPerfectSquare(121));
-		System.out.println(Math.random());
+//		System.out.println(Math.random());
+		
+		int [] a = {1,3,3,3,3,4};
+		System.out.println(findDuplicate(a));
 	}
-
-	static void sortArrayWithOnesAndZeroes(int[] a) {
-		int l = a.length;
-
-		int sum = a[0];
-
-		for (int i = 1; i < a.length; i++) {
-			sum += a[i];
-		}
-
-		int ones = sum;
-		int zeroes = sum - l;
-
-		for (int j = 0; j < zeroes; j++) {
-			a[j] = 0;
-		}
-
-		for (int j = sum - l + 1; j < ones; j++) {
-			a[j] = 0;
-		}
-	}
+	
+	public static int findDuplicate(int[] nums) {
+	    int slow = 0;
+	    int fast = 0;
+	 
+	    do{
+	        slow = nums[slow];
+	        fast = nums[nums[fast]];
+	    } while(slow != fast);
+	 
+	    System.out.println("fast = "+ fast + " and slow is " + slow);
+	    int find = 0;
+	 
+	    while(find != slow){
+	        slow = nums[slow];
+	        find = nums[find];
+	    }
+	    return find;
+	}	
 
 	static boolean isPerfectSquare(int n) {
 

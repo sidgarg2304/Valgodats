@@ -1,5 +1,8 @@
 package com.vishal.datastructures.linkedlist;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LinkedListPrograms {
 
 	public static void main(String[] args) {
@@ -152,6 +155,35 @@ public class LinkedListPrograms {
 		}
 	}
 
+	public static void cloneLinkedListWithRandomPointer(ListNodeWithRandomPointer<Integer> root) {
+
+		Map<ListNodeWithRandomPointer<Integer>, ListNodeWithRandomPointer<Integer>> map = new HashMap<>();
+		ListNodeWithRandomPointer<Integer> clonedRoot = new ListNodeWithRandomPointer<Integer>(root.getValue());
+		map.put(root, clonedRoot);
+
+		ListNodeWithRandomPointer<Integer> p = root;
+		ListNodeWithRandomPointer<Integer> q = clonedRoot;
+
+		p = p.getNext();
+		while (p != null) {
+			ListNodeWithRandomPointer<Integer> clonedP = new ListNodeWithRandomPointer<Integer>(p.getValue());
+			q.setNext(clonedP);
+			map.put(p, clonedP);
+			p = p.getNext();
+			q = clonedP;
+		}
+
+		p = root;
+		q = clonedRoot;
+		while (p != null) {
+			ListNodeWithRandomPointer<Integer> pRandomPointer = p.getRandomPointer() != null ? p.getRandomPointer() : null;
+			ListNodeWithRandomPointer<Integer> clonedPRandomPointer = map.get(pRandomPointer);
+			q.setRandomPointer(clonedPRandomPointer);
+			p = p.getNext();
+			q = q.getNext();
+		}
+	}
+
 	public static ListNode<Integer> createLinkedList() {
 		ListNode<Integer> first = new ListNode<Integer>(1);
 		ListNode<Integer> second = new ListNode<Integer>(2);
@@ -179,31 +211,4 @@ public class LinkedListPrograms {
 		System.out.print("null");
 		System.out.println("");
 	}
-}
-
-class ListNode<T> {
-
-	ListNode(T value) {
-		this.value = value;
-	}
-
-	T value;
-	ListNode<T> next;
-
-	public T getValue() {
-		return value;
-	}
-
-	public void setValue(T value) {
-		this.value = value;
-	}
-
-	public ListNode<T> getNext() {
-		return next;
-	}
-
-	public void setNext(ListNode<T> next) {
-		this.next = next;
-	}
-
 }
