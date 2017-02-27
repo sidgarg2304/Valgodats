@@ -149,6 +149,7 @@ public class StringSubStringAlgorithms {
 		return maxSubStrLen;
 	}
 
+	//shortestSubstringWithAllGivenCharacters("ADOBECODEBANC", "ABC"); // 4
 	public static void shortestSubstringWithAllGivenCharacters(String s, String win) {
 
 		Map<Character, Integer> dictionaryMap = new HashMap<Character, Integer>();

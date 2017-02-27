@@ -3,31 +3,31 @@ package com.vishal.algorithms.maths;
 public class MathsAlgorithms {
 
 	public static void main(String[] args) {
-//		System.out.println(isPerfectSquare(121));
-//		System.out.println(Math.random());
-		
-		int [] a = {1,3,3,3,3,4};
+		// System.out.println(isPerfectSquare(121));
+		// System.out.println(Math.random());
+
+		int[] a = { 1, 3, 3, 3, 3, 4 };
 		System.out.println(findDuplicate(a));
 	}
-	
+
 	public static int findDuplicate(int[] nums) {
-	    int slow = 0;
-	    int fast = 0;
-	 
-	    do{
-	        slow = nums[slow];
-	        fast = nums[nums[fast]];
-	    } while(slow != fast);
-	 
-	    System.out.println("fast = "+ fast + " and slow is " + slow);
-	    int find = 0;
-	 
-	    while(find != slow){
-	        slow = nums[slow];
-	        find = nums[find];
-	    }
-	    return find;
-	}	
+		int slow = 0;
+		int fast = 0;
+
+		do {
+			slow = nums[slow];
+			fast = nums[nums[fast]];
+		} while (slow != fast);
+
+		System.out.println("fast = " + fast + " and slow is " + slow);
+		int find = 0;
+
+		while (find != slow) {
+			slow = nums[slow];
+			find = nums[find];
+		}
+		return find;
+	}
 
 	static boolean isPerfectSquare(int n) {
 
@@ -42,6 +42,23 @@ public class MathsAlgorithms {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	public static int exp(int a, int b) {
+		if (b == 0 || b == 1) {
+			return a;
+		}
+
+		if (b == 2) {
+			return a * a;
+		}
+
+		if (b % 2 == 1) {
+			return a * exp(a, b - 1);
+		} else {
+			int res = exp(a, b / 2);
+			return res * res;
 		}
 	}
 }

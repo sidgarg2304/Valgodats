@@ -1,5 +1,7 @@
 package com.vishal.datastructures.binarytree;
 
+import java.util.Arrays;
+
 import com.vishal.datastructures.doublelinkedlist.DListNode;
 
 public class BinaryTreePrograms {
@@ -50,7 +52,8 @@ public class BinaryTreePrograms {
 		root.right.left = new BTNode<Integer>(6);
 		root.right.right = new BTNode<Integer>(9);
 
-		return root;
+		return root;		
+		
 	}
 
 	static BTNode<Integer> leastCommonAncestor(BTNode<Integer> root, BTNode<Integer> n1, BTNode<Integer> n2) {

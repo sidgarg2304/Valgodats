@@ -183,6 +183,44 @@ public class LinkedListPrograms {
 			q = q.getNext();
 		}
 	}
+	
+	/**
+	 * 1 -> 2 -> 3 -> 4 -> 5 to
+	 * 1 -> 5 -> 2 -> 4 -> 3
+	 * @param root
+	 */
+	public static void printFrontAndBackLinkedList(ListNode<Integer> root){
+		ListNode<Integer> slow = root;
+		ListNode<Integer> fast = root;
+		
+		while(fast != null){
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		ListNode<Integer> m = slow.next;
+		ListNode<Integer> reverseM = reverseLinkedList(m); // 5 -> 4
+		m.next = null;
+		
+		ListNode<Integer> p = root.next;
+		ListNode<Integer> q = reverseM;
+		ListNode<Integer> res = new ListNode<>(0);
+		res.setNext(root);
+		
+		ListNode<Integer> t = res.next;
+		boolean sec = true;
+		while(p != null && q != null){
+			if(sec){
+				t.setNext(q);
+				q = q.next;
+			}else{
+				t.setNext(p);
+				p = p.next;
+			}
+			t = t.next;
+		}
+		
+		printLinkedList(res.next);
+	}
 
 	public static ListNode<Integer> createLinkedList() {
 		ListNode<Integer> first = new ListNode<Integer>(1);

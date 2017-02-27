@@ -20,6 +20,7 @@ public class Trie {
 			p = p.childern[c - 'a'];
 		}
 		p.word = word;
+		p.isWord = true;
 	}
 
 	public boolean search(String word) {
@@ -34,5 +35,10 @@ public class Trie {
 			p = p.childern[c - 'a'];
 		}
 		return p.word.equals(word);
+	}
+	
+	public boolean startsWith(String word){
+		
+		return true;
 	}
 }

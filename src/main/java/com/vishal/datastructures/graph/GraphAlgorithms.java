@@ -14,10 +14,10 @@ import java.util.Stack;
 public class GraphAlgorithms {
 
 	public static void main(String[] args) {
-		testCanFinishCourses();
+		// testCanFinishCourses();
 		testConstructItenary();
-		testWordLadder();
-		testfindAllTransformationsequences();
+		// testWordLadder();
+		// testfindAllTransformationsequences();
 	}
 
 	public static void testCanFinishCourses() {
@@ -60,7 +60,7 @@ public class GraphAlgorithms {
 
 		System.out.println("min distance between words is " + minTransformationSequenceLength("cat", "dog", dictionary));
 	}
-	
+
 	public static void testfindAllTransformationsequences() {
 		Set<String> dictionary = new HashSet<String>();
 		dictionary.add("cat");
@@ -179,7 +179,7 @@ public class GraphAlgorithms {
 				for (char c = 'a'; c <= 'z'; c++) {
 					wordArr[i] = c;
 					String childWord = String.valueOf(wordArr);
-					if (dictionary.contains(childWord)) {						
+					if (dictionary.contains(childWord)) {
 						queue.offer(new GraphNode<String>(childWord, p.getLevelNumber() + 1));
 						dictionary.remove(childWord);
 					}
@@ -190,46 +190,47 @@ public class GraphAlgorithms {
 		return -1;
 	}
 
-	public static List<List<String>> findAllTransformationsequences(String startWord, String endWord, Set<String> dictionary) {
+	public static List<List<String>> findAllTransformationsequences(String startWord, String endWord,
+			Set<String> dictionary) {
 
 		List<List<String>> result = new ArrayList<>();
 		GraphNode<String> root = new GraphNode<String>(startWord);
 		Queue<GraphNode<String>> queue = new LinkedList<>();
 		queue.offer(root);
-		
+
 		Set<String> visited = new HashSet<>();
 		Set<String> unVisited = new HashSet<>();
 		unVisited.addAll(dictionary);
-		
+
 		int preNumSteps = 0;
 		while (!queue.isEmpty()) {
 			GraphNode<String> p = queue.poll();
 			if (p.value.equals(endWord)) {
 				List<String> res = new ArrayList<>();
-				while(p != null){
+				while (p != null) {
 					res.add(p.getValue());
 					p = p.getPrev();
 				}
-				result.add(res);				
+				result.add(res);
 				continue;
 			}
-			
-			if(preNumSteps < p.getLevelNumber()){
-				unVisited.removeAll(visited);	
-			}					
+
+			if (preNumSteps < p.getLevelNumber()) {
+				unVisited.removeAll(visited);
+			}
 			preNumSteps = p.getLevelNumber();
 
 			char[] wordArr = p.getValue().toCharArray();
 			for (int i = 0; i < p.getValue().length(); i++) {
 				char origChar = wordArr[i];
 				for (char c = 'a'; c <= 'z'; c++) {
-					if(c == origChar){
+					if (c == origChar) {
 						continue;
 					}
 					wordArr[i] = c;
 					String childWord = String.valueOf(wordArr);
-					if (unVisited.contains(childWord)) {											
-						queue.offer(new GraphNode<String>(childWord, p.getLevelNumber()+1, p));		
+					if (unVisited.contains(childWord)) {
+						queue.offer(new GraphNode<String>(childWord, p.getLevelNumber() + 1, p));
 						visited.add(childWord);
 					}
 					wordArr[i] = origChar;
@@ -238,5 +239,25 @@ public class GraphAlgorithms {
 		}
 		System.out.println(result);
 		return result;
+	}
+
+	public static void bfsWithLevelTracking(GraphNode<Integer> root) {
+		Queue<GraphNode<Integer>> queue = new LinkedList<>();
+
+		queue.offer(root);
+
+		int levelNumber = 0;
+		while (!queue.isEmpty()) {
+			int curLevelSize = queue.size();
+			System.out.println("printing level " + levelNumber + " nodes");
+			for (int i = 0; i < curLevelSize; i++) {
+				GraphNode<Integer> n = queue.poll();
+				System.out.println(n.value);
+				for (GraphNode<Integer> c : n.getNeighbors()) {
+					queue.offer(c);
+				}
+			}
+		}
+
 	}
 }

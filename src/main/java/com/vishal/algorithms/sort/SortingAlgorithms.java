@@ -13,6 +13,7 @@ public class SortingAlgorithms {
 		testQuickSort();
 		testCountSort();
 		testBucketSort();
+		String [] arr = new String[5];		
 	}
 
 	public static void bubbleSort(int[] a) {

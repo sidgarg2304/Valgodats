@@ -25,6 +25,9 @@ public class PalindromeAlgorithms {
 		
 		System.out.println("Shortest Palindrome by Appending any characters at Start of 'aabcdbc' is "
 				+ shortestPalindromeAppendingStart("aabcdbc"));
+		
+		System.out.println("Shortest Palindrome by Appending any characters at Start of 'aacecaaa' is "
+				+ shortestPalindromeAppendingStart("aacecaaa"));
 	}
 
 	public static void testShortestPalindromeAppendingLast() {
@@ -62,6 +65,7 @@ public class PalindromeAlgorithms {
 		}
 
 		String suffix = s.substring(i);
+//		System.out.println("suffix is " + suffix);
 		String prefix = new StringBuilder(suffix).reverse().toString();
 		String mid = shortestPalindromeAppendingStart(s.substring(0, i));
 		return prefix + mid + suffix;

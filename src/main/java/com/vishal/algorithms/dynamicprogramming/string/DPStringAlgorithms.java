@@ -8,10 +8,10 @@ import com.vishal.algorithms.string.palindrome.PalindromeAlgorithms;
 public class DPStringAlgorithms {
 
 	public static void main(String[] args) {		
-		testLongestPalindromicSubstring();
-		testLongestPalindromicSubsequence();		
+//		testLongestPalindromicSubstring();
+//		testLongestPalindromicSubsequence();		
 		testMinNumOfSplitsToMakeAllSubwordsPalindromes();
-		testcanWordBeSplitIntoValidDictionaryWords();
+//		testcanWordBeSplitIntoValidDictionaryWords();
 	}
 
 	public static String longestPalindromicSubstring(String s) {

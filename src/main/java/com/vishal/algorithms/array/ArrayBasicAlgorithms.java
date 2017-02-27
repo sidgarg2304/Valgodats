@@ -3,6 +3,7 @@ package com.vishal.algorithms.array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class ArrayBasicAlgorithms {
 
@@ -10,7 +11,7 @@ public class ArrayBasicAlgorithms {
 
 		int[] a = { 1, 1, 1, 2, 2, 4, 5 };
 		System.out.println("Input array is " + Arrays.toString(a));
-		
+
 		secLargestElement(a);
 
 		secondMostFrequentNumber(a);
@@ -143,5 +144,26 @@ public class ArrayBasicAlgorithms {
 		}
 
 		System.out.println(Arrays.toString(res));
+	}
+
+	public static void findNextGreatest(int[] a1, int[] a2) {
+
+		int[] res = new int[a1.length];
+		Map<Integer, Integer> map = new HashMap<>();
+		Stack<Integer> stack = new Stack<>();
+
+		for (int i : a2) {
+			while (!stack.isEmpty() && stack.peek() < i) {
+				map.put(stack.pop(), i);
+			}
+			stack.push(i);
+		}
+
+		for (int i = 0; i < a1.length; i++) {
+			res[i] = -1;
+			if (map.containsKey(a1[i])) {
+				res[i] = map.get(a1[i]);
+			}
+		}
 	}
 }

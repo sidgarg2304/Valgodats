@@ -24,5 +24,18 @@ public class ListNode<T> {
 	public void setNext(ListNode<T> next) {
 		this.next = next;
 	}
+	
+	public boolean equals(Object o) {
+		if (o instanceof ListNode<?>) {
+			ListNode<T> ln = (ListNode<T>) o;
+			if (ln.getValue().equals(this.getValue()) && ln.getNext() == this.getNext()) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
 }

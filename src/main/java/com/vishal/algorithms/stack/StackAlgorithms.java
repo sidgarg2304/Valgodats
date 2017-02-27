@@ -10,8 +10,9 @@ public class StackAlgorithms {
 
 		// maxAreaOfHistogram(new int[] { 2, 1, 5, 6, 2, 3 });
 
-		simplifyUnixPath("/home//foo/");
-		testNumofFishesAlive();
+//		simplifyUnixPath("/home//foo/");
+//		testNumofFishesAlive();
+//		testdeSerializeString();
 	}
 
 	public static void testNumofFishesAlive() {
@@ -29,6 +30,10 @@ public class StackAlgorithms {
 
 		System.out.println("num of fishes alive " + numofFishesAlive(fishHeights, fishDirection));		
 
+	}
+	
+	public static void testdeSerializeString(){
+		deSerializeString("3[a2[bd]g4[ef]h]");
 	}
 
 	/**
@@ -134,6 +139,31 @@ public class StackAlgorithms {
 		}		
 		return upStreamFishHeights.size() + downStreamFishHeights.size();
 
+	}
+	
+	// String str = "3[a2[bd]g4[ef]h]", the output should be
+	// "abdbdgefefefefhabdbdgefefefefhabdbdgefefefefh".
+	public static void deSerializeString(String s) {
+		Stack<String> stack = new Stack<>();
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (c != ']') {
+				stack.push(String.valueOf(c));
+			} else {
+				StringBuilder str = new StringBuilder();
+				while (!stack.peek().equals(String.valueOf('['))) {
+					str.append(stack.pop());
+				}
+				stack.pop();
+				int n = Integer.valueOf(stack.pop());
+				StringBuilder cur = new StringBuilder();
+				for (int j = 0; j < n; j++) {
+					cur.append(str.toString());
+				}
+				stack.push(cur.toString());
+			}
+		}
+		System.out.println(new StringBuilder(stack.pop()).reverse());
 	}
 	
 	
