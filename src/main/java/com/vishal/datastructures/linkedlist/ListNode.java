@@ -6,8 +6,8 @@ public class ListNode<T> {
 		this.value = value;
 	}
 
-	T value;
-	ListNode<T> next;
+	public T value;
+	public ListNode<T> next;
 
 	public T getValue() {
 		return value;
