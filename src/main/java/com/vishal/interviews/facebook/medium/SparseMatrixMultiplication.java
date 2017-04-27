@@ -1,6 +1,6 @@
 package com.vishal.interviews.facebook.medium;
 
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,7 +65,7 @@ public class SparseMatrixMultiplication {
 	    int m = A.length, n = A[0].length, nB = B[0].length;
 	    int[][] result = new int[m][nB];
 
-	    List[] indexA = new List[m];
+	    List<Integer>[] indexA = new List[m];
 	    for(int i = 0; i < m; i++) {
 	        List<Integer> numsA = new ArrayList<>();
 	        for(int j = 0; j < n; j++) {

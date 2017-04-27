@@ -64,7 +64,7 @@ class ZigzagIteratorSimple {
 	}
 
 	public int next() {
-		Iterator poll = list.remove();
+		Iterator<Integer> poll = list.remove();
 		int result = (Integer) poll.next();
 		if (poll.hasNext())
 			list.add(poll);

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-import com.vishal.interviews.facebook.easy.TreeNode;
 
 /**
  * 314. Binary Tree Vertical Order Traversal
@@ -74,7 +73,6 @@ import com.vishal.interviews.facebook.easy.TreeNode;
 public class BinaryTreeVerticalOrderTraversal {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
 	
@@ -93,48 +91,48 @@ public class BinaryTreeVerticalOrderTraversal {
 	 */
 	
 	public List<List<Integer>> verticalOrder(TreeNode root) {
-	    List<List<Integer>> res = new ArrayList<>();
-	    if (root == null) {
-	        return res;
-	    }
-	    
-	    Map<Integer, ArrayList<Integer>> map = new HashMap<>();
-	    Queue<TreeNode> q = new LinkedList<>();
-	    Queue<Integer> cols = new LinkedList<>();
+		List<List<Integer>> res = new ArrayList<>();
+		if (root == null) {
+			return res;
+		}
 
-	    q.add(root); 
-	    cols.add(0);
+		Map<Integer, ArrayList<Integer>> map = new HashMap<>();
+		Queue<TreeNode> q = new LinkedList<>();
+		Queue<Integer> cols = new LinkedList<>();
 
-	    int min = 0;
-	    int max = 0;
-	    
-	    while (!q.isEmpty()) {
-	        TreeNode node = q.poll();
-	        int col = cols.poll();
-	        
-	        if (!map.containsKey(col)) {
-	            map.put(col, new ArrayList<Integer>());
-	        }
-	        map.get(col).add(node.val);
+		q.add(root);
+		cols.add(0);
 
-	        if (node.left != null) {
-	            q.add(node.left); 
-	            cols.add(col - 1);
-	            min = Math.min(min, col - 1);
-	        }
-	        
-	        if (node.right != null) {
-	            q.add(node.right);
-	            cols.add(col + 1);
-	            max = Math.max(max, col + 1);
-	        }
-	    }
+		int min = 0;
+		int max = 0;
 
-	    for (int i = min; i <= max; i++) {
-	        res.add(map.get(i));
-	    }
+		while (!q.isEmpty()) {
+			TreeNode node = q.poll();
+			int col = cols.poll();
 
-	    return res;
+			if (!map.containsKey(col)) {
+				map.put(col, new ArrayList<Integer>());
+			}
+			map.get(col).add(node.val);
+
+			if (node.left != null) {
+				q.add(node.left);
+				cols.add(col - 1);
+				min = Math.min(min, col - 1);
+			}
+
+			if (node.right != null) {
+				q.add(node.right);
+				cols.add(col + 1);
+				max = Math.max(max, col + 1);
+			}
+		}
+
+		for (int i = min; i <= max; i++) {
+			res.add(map.get(i));
+		}
+
+		return res;
 	}
 
 	/**
@@ -272,4 +270,10 @@ public class BinaryTreeVerticalOrderTraversal {
         return res;
     }
 
+}
+
+class TreeNode{
+	int val;
+	TreeNode left;
+	TreeNode right;
 }

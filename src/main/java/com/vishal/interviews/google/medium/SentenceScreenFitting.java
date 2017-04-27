@@ -140,9 +140,15 @@ public class SentenceScreenFitting {
 	 */
 	public int wordsTyping(String[] sentence, int rows, int cols) {
 		String s = String.join(" ", sentence) + " ";
+		// start tracks the position of first character position in each row
 		int start = 0, l = s.length();
 		for (int i = 0; i < rows; i++) {
-			start += cols;
+			start += cols; // Ideally, Next row start will be current start + num
+								// of cols
+
+			// however we need to check if the last char at this start position
+			// is a space. else we need to remove the characters until we hit a
+			// space
 			if (s.charAt(start % l) == ' ') {
 				start++;
 			} else {

@@ -67,3 +67,13 @@ public class ReadNCharactersGivenRead4 extends Reader4{
     }
 
 }
+
+/**
+ * may be java provided class. research later
+ *
+ */
+class Reader4 {
+	int read4(char[] buf4) {
+		return 0;
+	}
+}

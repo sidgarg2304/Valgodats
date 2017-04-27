@@ -10,8 +10,11 @@ import java.util.List;
  * an array that is constructed by these N numbers successfully if one of the
  * following is true for the ith position (1 ≤ i ≤ N) in this array:
  * 
- * The number at the ith position is divisible by i. i is divisible by the
- * number at the ith position. Now given N, how many beautiful arrangements can
+ * The number at the ith position is divisible by i. 
+ * 
+ * i is divisible by the number at the ith position. 
+ * 
+ * Now given N, how many beautiful arrangements can
  * you construct?
  * 
  * Example 1: Input: 2 Output: 2 Explanation:
