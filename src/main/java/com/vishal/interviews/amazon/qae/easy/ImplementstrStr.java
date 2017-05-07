@@ -33,13 +33,7 @@ public class ImplementstrStr {
 				// we reached end of needle. so found needle
 				if (j == needle.length()) {
 					return i;
-				}
-
-				// i is at a position where if we start needle at i and the
-				// remaining characters in needle does not fit in haystack
-				if (i + j == haystack.length()) {
-					return -1;
-				}
+				}				
 
 				//needle's character matches in haystack starting at i
 				if (needle.charAt(j) != haystack.charAt(i + j)) {
