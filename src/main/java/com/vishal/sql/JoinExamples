@@ -1,0 +1,51 @@
+User Table
+id, name
+vid vishal
+sid swetha
+
+Friends Table
+UserId, FriendId, FriendSince
+vid     sid       jan 26th
+
+Query: Get me all the friends of given userid 'vid'
+
+select user.name from user, friends where friends.userid = 'vid' and friends.friendid = user.id
+
+Query: Get me all the friends of given username 'vishal'
+
+select u2.name from user u1, user u2, friends where u1.name = 'vishal' and friends.userid = u1.id and friends.friendid = u2.id;
+
+
+Another example
+
+Customer
+id name
+
+Order
+id cusid 
+
+Get orders placed by all the customers
+
+select order.id from order, customer where customer.id = order.cusid
+
+Twitter:
+User
+id name timesince
+
+follow
+id followerid followeid
+
+tweet
+id content userid timesince
+
+favorite
+id tweetid userid timesince
+
+Get me all the Tweets of user vishal which were favorited at least once
+
+select tweet.content from tweet, user, favorite, where user.name = 'vishal' and tweet.userid = user.id and favorite.tweetid = tweet.id orderby tweet.time desc limit 10
+
+
+ 
+
+

@@ -143,7 +143,7 @@ public class BinaryTreePrograms {
 			return dListLeft;
 		}
 
-		return dListRoot;
+		return dListLeft != null ? dListLeft : dListRoot;
 	}
 
 }
