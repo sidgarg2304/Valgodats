@@ -28,6 +28,9 @@ public class NonAdjacentOnesAndTwosPermutations {
 
 	static int dfs(int zeroes, int ones, boolean prevOne, Map<String, Integer> dp) {
 
+		if (zeroes < 0 || ones < 0) {
+			return 0;
+		}
 		String key = "z " + zeroes + " o " + ones + " p " + prevOne;
 		if (dp.containsKey(key)) {
 			return dp.get(key);
@@ -38,13 +41,11 @@ public class NonAdjacentOnesAndTwosPermutations {
 		}
 
 		int res = 0;
-		if (!prevOne && ones > 0) {
+		if (!prevOne) {
 			res += dfs(zeroes, ones - 1, true, dp);
 		}
 
-		if (zeroes > 0) {
-			res += dfs(zeroes - 1, ones, false, dp);
-		}
+		res += dfs(zeroes - 1, ones, false, dp);
 
 		dp.put(key, res);
 		return res;

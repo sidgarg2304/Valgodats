@@ -1,9 +1,7 @@
 package com.vishal.interviews.google.hard;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-
+import java.util.*;
+import java.util.Map.Entry;
 /**
  * 340. Longest Substring with At Most K Distinct Characters
  * 
@@ -20,6 +18,31 @@ public class LongestSubstringWithAtMostKDistinctCharacters {
 
 	}
 
+	public int lengthOfLongestSubstringKDistinctSlidingWindowIfMemoryConstraints(String s, int k) {
+		
+	
+		int res = 0;
+		Map<Character, Integer> map = new LinkedHashMap<>();
+		int st = 0;
+		for(int i = 0; i< s.length(); i++){
+			char c = s.charAt(i);
+			if(map.containsKey(c)){
+				map.remove(c);
+			}
+			map.put(c, i);
+			
+			if(map.size() > k){
+				Entry<Character,Integer> entry = map.entrySet().iterator().next();
+				char charToRemove = entry.getKey();
+				st = entry.getValue() + 1;
+				map.remove(charToRemove);
+			}
+			
+			res = Math.max(res, i-st +1);
+		}
+		return res;
+	}
+	
 	public int lengthOfLongestSubstringKDistinctSlidingWindow(String s, int k) {
 		int[] count = new int[256];
 		int num = 0, i = 0, res = 0;

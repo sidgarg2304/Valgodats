@@ -26,6 +26,29 @@ public class MappingDigitsToListOfChars {
 	public static void main(String[] args) {
 
 		System.out.println(mapDigits("12"));
+		System.out.println(mapDigitsBFS("12"));
+	}
+
+	static List<String> mapDigitsBFS(String s) {
+		List<String> res = new ArrayList<>();
+
+		String[] map = { "", "ABC", "DEF" };
+		Queue<String> queue = new LinkedList<>();
+		queue.offer("");
+
+		for (int i = 0; i < s.length(); i++) {
+			String cur = map[s.charAt(i) - '0'];
+			int l = queue.size();
+			for (int j = 0; j < l; j++) {
+				String prev = queue.poll();
+				for (int k = 0; k < cur.length(); k++) {
+					queue.offer(prev + cur.charAt(k));
+				}
+			}
+		}
+
+		res.addAll(queue);
+		return res;
 	}
 
 	static List<String> mapDigits(String s) {
@@ -40,17 +63,17 @@ public class MappingDigitsToListOfChars {
 	}
 
 	static void dfs(String s, String cur, int pos, Map<Integer, char[]> map, List<String> res) {
-		if(cur.length() == s.length()){
+		if (cur.length() == s.length()) {
 			res.add(cur);
 			return;
 		}
-		
+
 		int c = s.charAt(pos) - '0';
 		char[] arr = map.get(c);
-		for(int i = 0; i< arr.length; i++){
+		for (int i = 0; i < arr.length; i++) {
 			cur += arr[i];
-			dfs(s, cur, pos+1, map,res);
-			cur = cur.substring(0, cur.length()-1);
+			dfs(s, cur, pos + 1, map, res);
+			cur = cur.substring(0, cur.length() - 1);
 		}
 	}
 

@@ -72,11 +72,7 @@ public class TernaryToBinaryTree {
 	static int idx = 0;
 
 	public static TreeNode build(String s) {
-
-		if (idx >= s.length()) {
-			return null;
-		}
-
+		
 		TreeNode cur = new TreeNode(s.charAt(idx) - '0');
 		idx += 2;
 		if (idx < s.length() && s.charAt(idx - 1) != ':') {

@@ -1,0 +1,12 @@
+1. What, precisely, does the load average in `top` signify, and what does it look like if all threads in a pool are blocked?  
+
+2. Write a code such to implement semaphores to implement the concept of synchronization in multi-threaded environment.  
+
+3. Multithreading - How to run threads A,B and C in a sequence  
+
+4. Asks me about preventing deadlocks 
+
+5. What, precisely, does the load average in `top` signify, and 
+what does it look like if all threads in a pool are blocked?
+
+7. Multi threading / concurrency / distributed computing  

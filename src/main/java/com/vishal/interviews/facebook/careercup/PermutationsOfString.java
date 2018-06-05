@@ -12,8 +12,8 @@ public class PermutationsOfString {
 	static List<String> permutations(String s) {
 		List<String> res = new ArrayList<>();
 
-		if (s.length() == 1) {
-			res.add(s);
+		if (s.length() == 0) {
+			res.add("");
 			return res;
 		}		
 

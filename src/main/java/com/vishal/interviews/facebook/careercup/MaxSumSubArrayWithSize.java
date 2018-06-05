@@ -25,14 +25,16 @@ public class MaxSumSubArrayWithSize {
 			}
 
 			curSum += nums[i];
-			
-			if (i - st + 1 > k) {
+
+			if (st < nums.length && i - st + 1 > k) {
 				curSum -= nums[st++];
 			}
-			
-			maxSum = Math.max(maxSum, curSum);
+
+			if (i - st + 1 == k) {
+				maxSum = Math.max(maxSum, curSum);
+			}
 		}
-		
+
 		return maxSum;
 	}
 

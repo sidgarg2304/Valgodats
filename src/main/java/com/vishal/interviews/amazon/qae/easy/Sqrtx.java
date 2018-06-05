@@ -12,9 +12,9 @@ public class Sqrtx {
 		}
 
 		int l = 1;
-		int r = x;
+		int r = x / 2;
 
-		while (true) {
+		while (l <= r) {
 			int m = l + (r - l) / 2;
 
 			if (m * m > x) {
@@ -28,6 +28,7 @@ public class Sqrtx {
 				l = m + 1;
 			}
 		}
+		return l;
 	}
 
 }

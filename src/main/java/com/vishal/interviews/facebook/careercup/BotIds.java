@@ -38,12 +38,9 @@ public class BotIds {
 				l = mid - 1;
 			}
 		}
-
-		long curTimeInMillis = System.currentTimeMillis();
+		
 		for (int i = start; i < logs.length; i++) {
-			if (curTimeInMillis - logs[i].time >= n) {
-				map.put(logs[i].id, map.getOrDefault(logs[i].id, 0) + 1);
-			}
+			map.put(logs[i].id, map.getOrDefault(logs[i].id, 0) + 1);
 		}
 
 		for (String id : map.keySet()) {

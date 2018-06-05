@@ -10,6 +10,7 @@ public class BKTree {
 
 	public static void main(String[] args) {
 
+		
 	}
 
 	BKTreeNode root;
@@ -46,7 +47,7 @@ public class BKTree {
 		}
 
 		int l = dist - 1;
-		int h = dist - 1;
+		int h = dist + 1;
 
 		for (int k : cur.children.keySet()) {
 			if (k >= l && k <= h) {

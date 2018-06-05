@@ -19,7 +19,7 @@ package com.vishal.interviews.facebook.medium;
   0  -1 INF INF
   
  * After running your function, the 2D grid should be:
- *  3  -1   0   1
+ *3  -1   0   1
   2   2   1  -1
   1  -1   2  -1
   0  -1   3   4

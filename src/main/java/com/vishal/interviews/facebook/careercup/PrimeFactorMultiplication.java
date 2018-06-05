@@ -11,7 +11,7 @@ public class PrimeFactorMultiplication {
 
 	public static void main(String[] args) {
 
-		System.out.println(primeFactors(11));
+		System.out.println(primeFactors(77));
 	}
 
 	static List<Integer> primeFactors(int n) {
@@ -27,7 +27,7 @@ public class PrimeFactorMultiplication {
 		for (int i = 3; i <= Math.sqrt(n); i += 2) {
 			while (n % i == 0) {
 				res.add(i);
-				n /= 3;
+				n /= i;
 			}
 		}
 

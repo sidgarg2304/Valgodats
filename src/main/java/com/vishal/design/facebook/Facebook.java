@@ -79,18 +79,15 @@ public class Facebook {
 
 			count[noOfMutualFriends].add(k);
 		}
-
-		int top5 = 5;
+		
 		for (int i = count.length - 1; i >= 0; i--) {
-			if (count[i] != null) {
+			if (count[i] != null) {			
 				int k = 0;
-				while (k < count[i].size() && k < top5) {
+				while (k < count[i].size()) {
 					result.add(count[i].get(k++));
-				}
-				top5 -= k + 1;
-
-				if (top5 == 0) {
-					break;
+					if(result.size() == 5){
+						break;
+					}
 				}
 			}
 		}

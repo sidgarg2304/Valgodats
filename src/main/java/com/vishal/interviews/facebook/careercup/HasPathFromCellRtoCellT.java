@@ -1,16 +1,13 @@
 package com.vishal.interviews.facebook.careercup;
 
 /**
- * Given a 2D character array of size NxN. Find if there is a path from the cell 'R' to the cell 'T'. You can go left, right, up, down from a cell and you cannot pass through any cell marked with 'X'. 
-
-Example input: 
-X__R_X 
-X_XXX_ 
-______ 
-_XX_XX 
-XT__X_ 
-
-Output: true
+ * Given a 2D character array of size NxN. Find if there is a path from the cell
+ * 'R' to the cell 'T'. You can go left, right, up, down from a cell and you
+ * cannot pass through any cell marked with 'X'.
+ * 
+ * Example input: X__R_X X_XXX_ ______ _XX_XX XT__X_
+ * 
+ * Output: true
  */
 public class HasPathFromCellRtoCellT {
 
@@ -36,7 +33,7 @@ public class HasPathFromCellRtoCellT {
 
 	static boolean dfs(char[][] matrix, int i, int j, boolean[][] visited) {
 
-		if (i < 0 || j < 0 || i >= matrix.length || j >= matrix[0].length || matrix[i][j] == 'X') {
+		if (i < 0 || j < 0 || i >= matrix.length || j >= matrix[0].length || matrix[i][j] == 'X' || visited[i][j]) {
 			return false;
 		}
 

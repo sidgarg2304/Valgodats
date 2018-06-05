@@ -32,7 +32,7 @@ import java.util.Queue;
 ]
 
  * 2. Given binary tree [3,9,8,4,0,1,7],
- *      3
+ *   3
     /\
    /  \
    9   8
@@ -50,7 +50,7 @@ import java.util.Queue;
 ]
  *
  * 3. Given binary tree [3,9,8,4,0,1,7,null,null,null,2,5] (0's right child is 2 and 1's left child is 5),
- *  3
+ *   3
     /\
    /  \
    9   8

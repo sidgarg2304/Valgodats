@@ -15,8 +15,8 @@ public class CompareVersionNumbers {
 		int j = 0;
 
 		while (i < arr1.length || j < arr2.length) {
-			Integer v1 = i < arr1.length ? Integer.parseInt(arr1[i]) : 0;
-			Integer v2 = j < arr2.length ? Integer.parseInt(arr2[i]) : 0;
+			Integer v1 = i < arr1.length ? Integer.parseInt(arr1[i++]) : 0;
+			Integer v2 = j < arr2.length ? Integer.parseInt(arr2[j++]) : 0;
 
 			int compare = v1.compareTo(v2);
 			if (compare != 0) {

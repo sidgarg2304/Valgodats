@@ -14,4 +14,12 @@ public class Point {
 		x = a;
 		y = b;
 	}
+
+	public boolean equals(Object o) {
+		if (o instanceof Point) {
+			Point p = (Point) o;
+			return p.x == this.x && p.y == this.y;
+		}
+		return false;
+	}
 }
