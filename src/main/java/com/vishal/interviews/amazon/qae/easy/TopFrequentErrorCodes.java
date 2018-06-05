@@ -10,26 +10,18 @@ import java.util.Map.Entry;
  */
 public class TopFrequentErrorCodes {
 
-	public static void main(String[] args) {
-		List<Integer> errorCodes = new ArrayList<>();
-		errorCodes.add(500);
-		errorCodes.add(304);
-		errorCodes.add(304);
-		errorCodes.add(404);
-		errorCodes.add(404);
-		errorCodes.add(404);
-
-		System.out.println(topKErrorCodes(errorCodes, 2));
-	}
-
 	// 500 -> 1
 	// 304 -> 2
 	// 404 -> 3
 
 	// return {404, 304}
-	public static List<Integer> topKErrorCodes(List<Integer> errorCodes, int k) {
+	public List<Integer> topKErrorCodes(List<Integer> errorCodes, int k) {
 
 		LinkedList<Integer> res = new LinkedList<>();
+
+		if (errorCodes == null || errorCodes.isEmpty()) {
+			return res;
+		}
 
 		Map<Integer, Integer> countMap = new HashMap<>();
 		for (int e : errorCodes) {
@@ -54,8 +46,9 @@ public class TopFrequentErrorCodes {
 		}
 
 		/**
-		 * As mentioned above, make sure to add actual error codes(key) into the result
-		 * Since minHeap has the min value first, we need to copy in reverse order
+		 * As mentioned above, make sure to add actual error codes(key) into the
+		 * result Since minHeap has the min value first, we need to copy in
+		 * reverse order
 		 */
 		while (!minHeap.isEmpty()) {
 			res.addFirst(minHeap.poll().getKey());
