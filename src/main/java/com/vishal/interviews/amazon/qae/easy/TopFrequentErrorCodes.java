@@ -22,6 +22,11 @@ public class TopFrequentErrorCodes {
 		System.out.println(topKErrorCodes(errorCodes, 2));
 	}
 
+	// 500 -> 1
+	// 304 -> 2
+	// 404 -> 3
+
+	// return {404, 304}
 	public static List<Integer> topKErrorCodes(List<Integer> errorCodes, int k) {
 
 		LinkedList<Integer> res = new LinkedList<>();
@@ -30,11 +35,12 @@ public class TopFrequentErrorCodes {
 		for (int e : errorCodes) {
 			countMap.put(e, countMap.getOrDefault(e, 0) + 1);
 		}
-		// 500 -> 1
-		// 304 -> 2
-		// 404 -> 3
 
-		// return {404, 304}
+		/**
+		 * Sort min heap based on the counts in the map. Since we still need to
+		 * maintain the actual error codes, retaining whole Entry in the heap and
+		 * not just the count.
+		 */
 		PriorityQueue<Entry<Integer, Integer>> minHeap = new PriorityQueue<>(new Comparator<Entry<Integer, Integer>>() {
 			public int compare(Entry<Integer, Integer> e1, Entry<Integer, Integer> e2) {
 				return e1.getValue() - e2.getValue();
@@ -47,7 +53,10 @@ public class TopFrequentErrorCodes {
 			}
 		}
 
-		//Since minHeap has the min value first, we need to copy in reverse order
+		/**
+		 * As mentioned above, make sure to add actual error codes(key) into the result
+		 * Since minHeap has the min value first, we need to copy in reverse order
+		 */
 		while (!minHeap.isEmpty()) {
 			res.addFirst(minHeap.poll().getKey());
 		}
