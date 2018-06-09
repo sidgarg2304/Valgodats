@@ -1,4 +1,4 @@
-package com.vishal.interviews.topinterviewquestions.easy;
+package com.vishal.interviews.amazon.qae.easy;
 
 /**
  * Given two strings s and t , write a function to determine if t is an anagram of s.
