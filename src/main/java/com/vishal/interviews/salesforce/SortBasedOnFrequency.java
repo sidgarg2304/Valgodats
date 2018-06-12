@@ -17,12 +17,14 @@ public class SortBasedOnFrequency {
 			return new int[] {};
 		}
 
+		int maxCnt = 0;
 		Map<Integer, Integer> countMap = new HashMap<>();
 		for (int i : nums) {
 			countMap.put(i, countMap.getOrDefault(i, 0) + 1);
+			maxCnt = Math.max(maxCnt, countMap.get(i));
 		}
 
-		List<Integer>[] buckets = new List[nums.length + 1];
+		List<Integer>[] buckets = new List[maxCnt + 1];
 
 		for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
 			// key is element
