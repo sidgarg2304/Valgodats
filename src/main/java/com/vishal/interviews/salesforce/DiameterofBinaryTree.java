@@ -1,4 +1,6 @@
-package com.vishal.interviews.google.easy;
+package com.vishal.interviews.salesforce;
+
+import com.vishal.interviews.util.TreeNode;
 
 /**
  * 543. Diameter of Binary Tree
@@ -19,28 +21,23 @@ Note: The length of path between two nodes is represented by the number of edges
 public class DiameterofBinaryTree {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
-	
+
 	static int max = 0;
-	
-	public int diameterOfBinaryTree(TreeNode root) {
-		maxDepth(root);
-		return max;
-	}
-	
-	static int maxDepth(TreeNode root){
-		if(root == null){
+
+	static int maxDepth(TreeNode root) {
+		if (root == null) {
 			return 0;
 		}
-		
+
 		int l = maxDepth(root.left);
-		int r = maxDepth(root.left);
-		
-		max = Math.max(l+r, max);
-		
-		return Math.max(l, r)+1;
+		int r = maxDepth(root.right);
+
+		max = Math.max(l + r, max);
+
+		return Math.max(l, r) + 1;
 	}
 
 }
+
