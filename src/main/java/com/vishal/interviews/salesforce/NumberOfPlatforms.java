@@ -17,9 +17,8 @@ import com.vishal.interviews.util.Interval;
  * no train waits. We are given two arrays which represent arrival and departure
  * times of trains that stop
  * 
- * Examples:
- * Input:  arr[]  = {9:00,  9:40, 9:50,  11:00, 15:00, 18:00}
-           dep[]  = {9:10, 12:00, 11:20, 11:30, 19:00, 20:00}
+ * Examples: Input: arr[] = {9:00, 9:40, 9:50, 11:00, 15:00, 18:00} dep[] =
+ * {9:10, 12:00, 11:20, 11:30, 19:00, 20:00}
  * 
  * 
  * Output: 3 There are at-most three trains at a time (time between 11:00 to
@@ -32,10 +31,10 @@ public class NumberOfPlatforms {
 	public static void main(String[] args) {
 		int arr[] = { 900, 940, 950, 1100, 1500, 1800 };
 		int dep[] = { 910, 1200, 1120, 1130, 1900, 2000 };
-		System.out.println(findPlatform(arr, dep, arr.length));
+		System.out.println(findPlatform(arr, dep));
 	}
 
-	static int findPlatform(int arr[], int dep[], int n) {
+	static int findPlatform(int arr[], int dep[]) {
 		// Sort arrival and departure arrays
 		Arrays.sort(arr);
 		Arrays.sort(dep);
@@ -47,7 +46,7 @@ public class NumberOfPlatforms {
 
 		// Similar to merge in merge sort to process
 		// all events in sorted order
-		while (i < n && j < n) {
+		while (i < arr.length && j < dep.length) {
 			// If next event in sorted order is arrival,
 			// increment count of platforms needed
 			if (arr[i] <= dep[j]) {
