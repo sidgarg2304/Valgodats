@@ -8,7 +8,8 @@ public class MulthThreadingWaitNotify {
 		makeTransactionsWithoutFullbalance();
 
 		// This sleep is just for testing purpose to show two transactions
-		// seperately
+		// seperately. For real time, remove sleep and test to see threads of both
+		// transactions will run in random order
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -21,7 +22,7 @@ public class MulthThreadingWaitNotify {
 
 	/**
 	 * Since initially we have only 5000 Rs, shilpa or sekhar has to wait before
-	 * vishal deposit is finished
+	 * vishal deposit is finished and that is guaranteed
 	 */
 	static void makeTransactionsWithoutFullbalance() {
 		Account a = new Account("shilpa", 500);
@@ -110,8 +111,8 @@ class AccountWithdrawl implements Runnable {
 				}
 			}
 			a.balance -= amount;
-			System.out
-					.println(amount + " withdrawn from the account " + a.name + " by " + Thread.currentThread().getName());
+			System.out.println(amount + " withdrawn from the account " + a.name + " by " + Thread.currentThread().getName()
+					+ " and remaining balance is " + a.balance);
 		}
 	}
 }
@@ -129,8 +130,9 @@ class AccountDeposit implements Runnable {
 
 	public void run() {
 		synchronized (a) {
-			System.out.println(amount + " deposited to the account " + a.name + " by " + Thread.currentThread().getName());
 			a.balance += amount;
+			System.out.println(amount + " deposited to the account " + a.name + " by " + Thread.currentThread().getName()
+					+ " and remaining balance is " + a.balance);
 			a.notifyAll();
 		}
 	}
@@ -143,5 +145,6 @@ class Account {
 	Account(String name, double balance) {
 		this.name = name;
 		this.balance = balance;
+		System.out.println(name + " account is created with balance " + balance);
 	}
 }
