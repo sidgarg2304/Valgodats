@@ -23,6 +23,12 @@ public class DiameterofBinaryTree {
 	public static void main(String[] args) {
 
 	}
+	
+	int diameter(TreeNode root){
+		
+		maxDepth(root);
+		return max;
+	}
 
 	static int max = 0;
 

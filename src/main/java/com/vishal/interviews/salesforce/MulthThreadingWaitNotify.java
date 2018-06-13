@@ -18,6 +18,18 @@ public class MulthThreadingWaitNotify {
 
 		System.out.println("\nshowing second example when account has sufficeint balance for both withdrawls");
 		makeTransactionsWithFullbalance();
+
+		// This sleep is just for testing purpose to show two transactions
+		// seperately. For real time, remove sleep and test to see threads of both
+		// transactions will run in random order
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+//		System.out.println("\nshowing third example when account has sufficeint balance for both withdrawls");
+//		makeTransactionsWithoutFullbalanceUsingSameAccObject();
 	}
 
 	/**
@@ -88,6 +100,22 @@ public class MulthThreadingWaitNotify {
 		accDepThred.start();
 	}
 
+	static void makeTransactionsWithoutFullbalanceUsingSameAccObject() {
+		Account a = new Account("Ashok", 500);
+		a.withdraw(500);
+		a.withdraw(500);
+
+		// This sleep is just for testing purpose to make sure deposit thread
+		// starts late
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		a.deposit(500);
+	}
+
 }
 
 class AccountWithdrawl implements Runnable {
@@ -146,5 +174,43 @@ class Account {
 		this.name = name;
 		this.balance = balance;
 		System.out.println(name + " account is created with balance " + balance);
+	}
+
+	//not working
+	void withdraw(double amount) {
+		Runnable r = new Runnable() {
+			public void run() {
+				synchronized (this) {
+					if (balance < amount) {
+						try {
+							System.out.println("waiting for withdraw " + amount);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					System.out.println("withdrawing " + amount);
+					balance -= amount;
+
+				}
+			}
+		};
+		Thread t = new Thread(r);
+		t.start();
+	}
+
+	//not working
+	void deposit(double amount) {
+		Runnable r = new Runnable() {
+			public void run() {
+				synchronized (this) {
+					System.out.println("depositing " + amount);
+					balance += amount;
+					this.notifyAll();
+				}
+			}
+		};
+		Thread t = new Thread(r);
+		t.start();
 	}
 }
