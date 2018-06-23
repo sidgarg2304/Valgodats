@@ -9,13 +9,11 @@ public class Friendship {
 
 	public static void main(String[] args) {
 
-		Friendship f = new Friendship();
-		f.makeFriend("vishal", "swetha");
-		f.makeFriend("swetha", "shilpa");
-		f.makeFriend("shilpa", "neelima");
-		System.out.println(f.getDirectFriends("vishal"));
-		// f.unmakeFriend("vishal", "swetha");
-		System.out.println(f.getIndirectFriends("vishal"));
+		Set<Node> visited = new HashSet<>();
+		Node n = new Node("vishal");
+		visited.add(n);
+		Node n1 = new Node("vishal");
+		System.out.println("contains " + (visited.contains(n1)));
 	}
 
 	Map<String, Node> network;
@@ -33,6 +31,12 @@ public class Friendship {
 	// Note: Do not forget to write tests to have good test coverage for this
 	// method
 	public void makeFriend(String nameKey, String friendName) {
+
+		if (nameKey == null || "".equals(nameKey.trim()) || friendName == null || "".equals(friendName.trim())
+				|| nameKey.trim().equals(friendName.trim())) {
+			return;
+		}
+
 		Node user = findNode(nameKey);
 		Node friend = findNode(friendName);
 
@@ -40,7 +44,8 @@ public class Friendship {
 			return;
 		}
 
-		makeFriend(user, friend);
+		user.getFriends().add(friend);
+		friend.getFriends().add(user);
 	}
 
 	Node findNode(String name) {
@@ -52,11 +57,6 @@ public class Friendship {
 		return n;
 	}
 
-	public void makeFriend(Node user, Node friend) {
-		user.getFriends().add(friend);
-		friend.getFriends().add(user);
-	}
-
 	// This is for you to implement
 	//
 	// This method takes 2 String parameters and
@@ -66,16 +66,17 @@ public class Friendship {
 	// Note: Do not forget to write tests to have good test coverage for this
 	// method
 	public void unmakeFriend(String nameKey, String friendName) {
+		
+		if (nameKey == null || "".equals(nameKey.trim()) || friendName == null || "".equals(friendName.trim())
+				|| nameKey.trim().equals(friendName.trim())) {
+			return;
+		}
+		
 		Node user = network.get(nameKey);
 		Node friend = network.get(friendName);
-		
 
-		unmakeFriend(user, friend);
-	}
-
-	public void unmakeFriend(Node user, Node friend) {
 		user.getFriends().remove(friend);
-		friend.getFriends().remove(friend);
+		friend.getFriends().remove(user);
 	}
 
 	// This is for you to implement
@@ -92,6 +93,11 @@ public class Friendship {
 	// method
 	public List<String> getDirectFriends(String nameKey) {
 		List<String> res = new ArrayList<>();
+
+		if (nameKey == null || "".equals(nameKey.trim()) || !network.containsKey(nameKey)) {
+			return res;
+		}
+		
 		Node user = network.get(nameKey);
 
 		List<Node> friends = user.getFriends();
@@ -116,6 +122,10 @@ public class Friendship {
 	public List<String> getIndirectFriends(String nameKey) {
 		List<String> res = new ArrayList<>();
 
+		if (nameKey == null || "".equals(nameKey.trim()) || !network.containsKey(nameKey)) {
+			return res;
+		}
+
 		Set<String> visited = new HashSet<>();
 
 		Node user = network.get(nameKey);
@@ -129,13 +139,12 @@ public class Friendship {
 			for (int i = 0; i < size; i++) {
 				Node cur = queue.poll();
 
-				System.out.println("cur is " + cur.getName());
-				// not add current user and direct friends. So, consider only from
-				// 3rd level
 				if (visited.contains(cur.getName())) {
 					continue;
 				}
 
+				// not add current user and direct friends. So, consider only from
+				// 3rd level
 				if (level >= 3) {
 					res.add(cur.getName());
 				}
@@ -167,12 +176,17 @@ class Node {
 		this.name = name;
 		friends = new ArrayList<>();
 	}
-	
-	public boolean equals(Object o){
-		if(o instanceof Node){
-			Node n = (Node)o;
+
+	public boolean equals(Object o) {
+		if (o instanceof Node) {
+			Node n = (Node) o;
 			return this.getName().equals(n.getName());
 		}
 		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+	    return name.hashCode();
 	}
 }

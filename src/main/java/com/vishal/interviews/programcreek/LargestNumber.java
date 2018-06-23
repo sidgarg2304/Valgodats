@@ -5,10 +5,10 @@ import java.util.*;
 public class LargestNumber {
 
 	public static void main(String[] args) {
-
+		System.out.println(largestNumber(new int[] { 54, 546, 548, 60 }));
 	}
 
-	public String largestNumber(int[] nums) {
+	public static String largestNumber(int[] nums) {
 
 		if (nums == null || nums.length == 0) {
 			return "";
