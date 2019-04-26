@@ -12,7 +12,7 @@ public class PathSumIII {
 
 	public int pathSum(TreeNode root, int sum) {
 		Map<Integer, Integer> preSum = new HashMap<>();
-		preSum.put(0, -1);
+		preSum.put(0, 1);
 
 		return dfs(root, sum, 0, preSum);
 	}

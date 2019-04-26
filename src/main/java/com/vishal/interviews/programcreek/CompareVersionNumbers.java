@@ -4,9 +4,10 @@ public class CompareVersionNumbers {
 
 	public static void main(String[] args) {
 
+		System.out.println(compareVersion("5.9", "5.10"));
 	}
 
-	public int compareVersion(String version1, String version2) {
+	public static int compareVersion(String version1, String version2) {
 
 		String[] arr1 = version1.split("\\.");
 		String[] arr2 = version2.split("\\.");

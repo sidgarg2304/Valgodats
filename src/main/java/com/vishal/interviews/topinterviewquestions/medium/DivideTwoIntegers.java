@@ -28,7 +28,7 @@ public class DivideTwoIntegers {
 		while (den <= num) {
 			int val = 1;
 			int d = den;
-			while(num - den >= 0){
+			while(num - d >= 0){
 				d <<= 1;
 				val <<= 1;
 			}

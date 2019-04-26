@@ -13,12 +13,89 @@ public class WordLadderII {
 		wordList.add("log");
 		wordList.add("cog");
 		wordList.add("dog");
-
-		System.out.println(findLadders("hit", "cog", wordList));
+		
 
 	}
 
-	public static List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+	public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+
+		List<List<String>> res = new ArrayList<>();
+
+		Map<String, List<String>> map = new HashMap<>();
+		for (String word : wordList) {
+			char[] arr = word.toCharArray();
+			for (int i = 0; i < arr.length; i++) {
+				char t = arr[i];
+				arr[i] = '*';
+				String pattern = String.valueOf(arr);
+				arr[i] = t;
+				if (!map.containsKey(pattern)) {
+					map.put(pattern, new ArrayList<>());
+				}
+				map.get(pattern).add(word);
+			}
+		}
+
+		Queue<Node> queue = new LinkedList<>();
+		queue.offer(new Node(beginWord, null, 0));
+
+		Set<String> visited = new HashSet<>();
+		visited.add(beginWord);
+
+		Set<String> unVisited = new HashSet<>();
+		unVisited.addAll(wordList);
+
+		int minSteps = 0;
+		while (!queue.isEmpty()) {
+
+			int size = queue.size();
+			for (int s = 0; s < size; s++) {
+				Node cur = queue.poll();
+
+				if (endWord.equals(cur.word)) {
+					System.out.println("endword");
+					if (minSteps == 0) {
+						minSteps = cur.numSteps;
+					}
+
+					if (minSteps == cur.numSteps) {
+						List<String> curRes = new ArrayList<>();
+						curRes.add(endWord);
+						Node p = cur.parent;
+						while (p != null) {
+							curRes.add(0, p.word);
+							p = p.parent;
+						}
+						res.add(curRes);
+						continue;
+					}
+				}
+
+				char[] arr = cur.word.toCharArray();
+				for (int i = 0; i < arr.length; i++) {
+					char t = arr[i];
+					arr[i] = '*';
+					String pattern = String.valueOf(arr);
+					arr[i] = t;
+					List<String> dictWordsWithThisPattern = map.get(pattern);
+					if (dictWordsWithThisPattern == null) {
+						continue;
+					}
+					for (String adjWord : dictWordsWithThisPattern) {
+						if (unVisited.contains(adjWord)) {							
+							queue.offer(new Node(adjWord, cur, cur.numSteps + 1));
+							visited.add(adjWord);
+						}
+					}
+
+				}
+			}
+			unVisited.removeAll(visited);
+		}
+		return res;
+	}
+	
+	public static List<List<String>> findLaddersOld(String beginWord, String endWord, List<String> wordList) {
 
 		List<List<String>> res = new ArrayList<>();
 

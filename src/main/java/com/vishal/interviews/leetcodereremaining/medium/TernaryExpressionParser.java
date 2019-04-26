@@ -7,9 +7,40 @@ public class TernaryExpressionParser {
 	public static void main(String[] args) {
 
 	}
+	
+	public String parseTernary(String expression) {
+
+		if (expression == null || expression.isEmpty() || expression.length() == 1) {
+			return expression;
+		}
+
+		int i = 0;
+		int cnt = 0;
+
+		while (i < expression.length()) {
+			char c = expression.charAt(i);
+			if (c == '?') {
+				cnt++;
+			} else if (c == ':') {
+				cnt--;
+				if (cnt == 0) {
+					break;
+				}
+			}			
+			i++;
+		}				
+
+		char f = expression.charAt(0);		
+		if (f == 'T') {
+			return parseTernary(expression.substring(2, i));
+		} else {
+			return parseTernary(expression.substring(i + 1));
+		}
+
+	}
 
 	// "F?1:T?4:5"
-	public String parseTernary(String expression) {
+	public String parseTernaryUsingStack(String expression) {
 		if (expression == null || expression.length() == 0)
 			return "";
 

@@ -1,9 +1,6 @@
 package com.vishal.interviews.facebook.easy;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
+import java.util.*;
 /**
  * 257. Binary Tree Paths
  * Given a binary tree, return all root-to-leaf paths.
@@ -22,7 +19,9 @@ public class BinaryTreePaths {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+	
 	}
+		
 	
 	/**
 	 * Accepted Java simple solution in 8 lines

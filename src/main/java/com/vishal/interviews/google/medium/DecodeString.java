@@ -31,6 +31,45 @@ public class DecodeString {
 	public static void main(String[] args) {
 
 	}
+	
+	public String decodeStringRec(String s) {
+
+		StringBuilder sb = new StringBuilder();
+		String num = "";
+		int i = 0;		
+		while (i < s.length()) {
+			char c = s.charAt(i);
+			if (c == '[') {
+				int count = 1;
+				int en = i + 1;				
+				while (en < s.length() && count != 0) {
+					
+					if (s.charAt(en) == '[') {
+						count++;
+					}
+
+					if (s.charAt(en) == ']') {
+						count--;
+					}
+					en++;
+				}
+				String insideBraces = decodeStringRec(s.substring(i + 1, en - 1));
+				int numOfTimes = Integer.parseInt(num);
+				num = "";
+				for (int l = 0; l < numOfTimes; l++) {
+					sb.append(insideBraces);
+				}
+				i = en;
+			} else if (Character.isDigit(c)) {
+				num += s.charAt(i);
+				i++;
+			} else {
+				sb.append(c);
+				i++;
+			}
+		}
+		return sb.toString();
+	}
 	public String decodeStringUsingStack(String s) {
       String res = "";
       Stack<Integer> countStack = new Stack<>();

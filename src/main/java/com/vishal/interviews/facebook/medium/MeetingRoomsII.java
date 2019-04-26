@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import com.vishal.interviews.util.Interval;
+
 /**
  * 253. Meeting Rooms II
  * 
@@ -31,14 +33,14 @@ public class MeetingRoomsII {
 		// Sort the intervals by start time
 		Arrays.sort(intervals, new Comparator<Interval>() {
 			public int compare(Interval a, Interval b) {
-				return a.start - b.start;
+				return a.st - b.st;
 			}
 		});
 
 		// Use a min heap to track the minimum end time of merged intervals
 		PriorityQueue<Interval> heap = new PriorityQueue<Interval>(intervals.length, new Comparator<Interval>() {
 			public int compare(Interval a, Interval b) {
-				return a.end - b.end;
+				return a.en - b.en;
 			}
 		});
 
@@ -49,10 +51,10 @@ public class MeetingRoomsII {
 			// get the meeting room that finishes earliest
 			Interval interval = heap.poll();
 
-			if (intervals[i].start >= interval.end) {
+			if (intervals[i].st >= interval.en) {
 				// if the current meeting starts right after
 				// there's no need for a new room, merge the interval
-				interval.end = intervals[i].end;
+				interval.en = intervals[i].en;
 			} else {
 				// otherwise, this meeting needs a new room
 				heap.offer(intervals[i]);
@@ -75,8 +77,8 @@ public class MeetingRoomsII {
 		int[] starts = new int[intervals.length];
 		int[] ends = new int[intervals.length];
 		for (int i = 0; i < intervals.length; i++) {
-			starts[i] = intervals[i].start;
-			ends[i] = intervals[i].end;
+			starts[i] = intervals[i].st;
+			ends[i] = intervals[i].en;
 		}
 		Arrays.sort(starts);
 		Arrays.sort(ends);
@@ -93,10 +95,7 @@ public class MeetingRoomsII {
 
 }
 
-class Interval {
-	int start;
-	int end;
-}
+
 
 /**
  * Simulate event queue procession. Create event for each start and end of
@@ -140,8 +139,8 @@ class SolutionProcessEventQueue {
 
 		// create event and push into event queue
 		for (Interval interval : intervals) {
-			events.offer(new Event(interval.start, START));
-			events.offer(new Event(interval.end, END));
+			events.offer(new Event(interval.st, START));
+			events.offer(new Event(interval.en, END));
 		}
 
 		// process events

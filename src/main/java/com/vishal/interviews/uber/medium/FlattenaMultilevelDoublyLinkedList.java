@@ -1,0 +1,59 @@
+package com.vishal.interviews.uber.medium;
+
+public class FlattenaMultilevelDoublyLinkedList {
+
+	public static void main(String[] args) {
+
+	}
+
+	public Node flatten(Node head) {
+
+		if (head == null) {
+			return head;
+		}
+
+		Node nextC = head.next;
+
+		if (head.child != null) {
+			Node next = head.next;
+
+			Node child = flatten(head.child);
+			head.child = null;
+
+			child.prev = head;
+			head.next = child;
+
+			while (child.next != null) {
+				child = child.next;
+			}
+
+			child.next = next;
+			if (next != null) {
+				next.prev = child;
+			}
+		}
+
+		flatten(nextC);
+
+		return head;
+
+	}
+
+	class Node {
+		public int val;
+		public Node prev;
+		public Node next;
+		public Node child;
+
+		public Node() {
+		}
+
+		public Node(int _val, Node _prev, Node _next, Node _child) {
+			val = _val;
+			prev = _prev;
+			next = _next;
+			child = _child;
+		}
+	};
+
+}
